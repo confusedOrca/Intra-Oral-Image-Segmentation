@@ -16,8 +16,9 @@ def generate_mask(polygons, image_shape):
 def save_masks(polygons_data, label, height, width, output_dir, name):
         label_polygons = [shape['points'] for shape in polygons_data if shape['label'] == label]
         mask = generate_mask(label_polygons, (height, width))
-        filename = f"{name}"
-        cv2.imwrite(os.path.join(output_dir, filename), mask)
+        os.makedirs(output_dir, exist_ok=True)
+        file_path = os.path.join(output_dir, name)
+        cv2.imwrite(file_path, mask)
 
 
 if __name__ == "__main__":

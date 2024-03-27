@@ -7,7 +7,7 @@ parent_dir = os.path.abspath(os.path.join(os.getcwd(), os.pardir))
 sys.path.append(parent_dir)
 
 from data_structures.example import ImageData
-from shape_processor import select_and_process_shapes
+from utils import select_and_process_shapes
     
 
 def list_examples(dir_path, jaw) -> List[ImageData]:
