@@ -29,7 +29,7 @@ class IntraOralDataset(Dataset):
         masks = []
         for mask_path in mask_paths:
             mask = np.array(Image.open(mask_path).convert("L"), dtype=np.float32)
-            mask[mask == 255.0] = 1.0
+            mask[mask > 0] = 1.0
             masks.append(mask)
         
         if self.transform is not None:

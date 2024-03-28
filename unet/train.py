@@ -6,26 +6,24 @@ import torch.nn as nn
 import torch.optim as optim
 from model import Unet
 import cv2
-from utils import save_checkpoint, load_checkpoint, get_loaders
+from utils import save_checkpoint, load_checkpoint
+from dataset.dataloader import get_data_loaders
 
 LEARNING_RATE = 1e-4
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 BATCH_SIZE = 16
 NUM_EPOCHS = 10
 NUM_WORKERS = 2
-IMAGE_HEIGHT = 256
-IMAGE_WIDTH = 256
+MAX_DIM = 256
 PIN_MEMORY = True
 LOAD_MODEL = False
-IMG_DIR = "C:\\Users\\Siam\Desktop\\CSE499A\\Intra-Oral-Image-Segmentation\\Labelled intraoral smartphone images\\Labels_Lower jaw"
-MASK_DIR = "C:\\Users\\Siam\\Desktop\\CSE499A\\Intra-Oral-Image-Segmentation\\masks_v1\lower"
 
 def train_fn(loader, model, optimizer, loss_fn, scaler):
     loop = tqdm(loader)
     
     for batch_idx, (data, targets) in enumerate(loop):
         data = data.to(device=DEVICE)
-        targets = targets.to(device=DEVICE)
+        targets = targets.float().to(device=DEVICE)
         
         with torch.cuda.amp.autocast():
             predictions = model(data)
