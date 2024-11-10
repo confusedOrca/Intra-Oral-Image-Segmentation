@@ -1,0 +1,10 @@
+intra_oral_dataset/
+Labelled intraoral smartphone images/
+masks_v1/
+masks_v2/
+analyze_masks.ipynb
+dataset_v1.1/
+dataset_v1.2/
+dataset_v1.3/
+dataset_v1.4/
+dataset_v1.4_detect/
