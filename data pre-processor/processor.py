@@ -4,7 +4,7 @@ import os
 from PIL import Image
 import shutil
 import config
-from os.path import join, abspath
+from os.path import join
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 MAX_DIM = config.MAX_DIM
