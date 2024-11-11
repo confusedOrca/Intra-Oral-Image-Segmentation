@@ -1,11 +1,8 @@
 from typing import Any, List
 
 class ImageData:
-    """_summary_
-    object to store image data of each example in dataset.
-    """
-    def __init__(self, img_name: str, height: int, width: int, shapes: List[Any] = None):
-        self.img = img_name
+    def __init__(self, img: str, height: int, width: int, shapes: List[Any] = None):
+        self.img = img
         self.height = height
         self.width = width
         self.shapes = shapes if shapes is not None else []
@@ -18,5 +15,5 @@ class ImageData:
 
 
 if __name__ == "__main__":
-     image_data = ImageData("/path/", 100, 200, "upper", ["shape1", "shape2"])
+     image_data = ImageData("/path/", 100, 200, ["shape1", "shape2"])
      print(image_data)
