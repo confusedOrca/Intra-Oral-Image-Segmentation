@@ -18,7 +18,7 @@ def generate_mask(data):
         tasks = []
 
         for row in data:
-            class_id = row[0] * 50
+            class_id = row[0]
             coordinates = row[1:]
             points = [
                 (int(x * IMAGE_WIDTH), int(y * IMAGE_HEIGHT)) 
