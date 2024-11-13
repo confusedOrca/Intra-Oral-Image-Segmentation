@@ -1,2 +1,5 @@
 dataset/*
 !dataset/readme.txt
+__pycache__/
+*.pyc
+*.pyo
