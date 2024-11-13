@@ -1,5 +1,5 @@
-import os
-from os.path import abspath, dirname
+from os import getcwd, listdir, cpu_count
+from os.path import abspath, dirname, join
 import json
 from typing import List
 from data_structures.example import ImageData
@@ -7,7 +7,7 @@ from config import LABELS
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 MODULE_DIR = dirname(abspath(__file__))
-BASE_DIR = os.getcwd()
+BASE_DIR = getcwd()
 
 def format_polygon(polygon, img_w, img_h, label, s_type):
     if label.isdigit():
@@ -43,14 +43,21 @@ def process_file(path: str) -> ImageData:
 
 def list_examples(dir_path: str) -> List[ImageData]:
     datalist = []
-    json_files = [os.path.join(dir_path, filename) for filename in os.listdir(dir_path) if filename.endswith('.json')]
+    json_files = [
+        join(dir_path, filename) 
+        for filename in listdir(dir_path) 
+        if filename.endswith('.json')
+        ]
 
-    with ThreadPoolExecutor() as executor:
-        futures = {executor.submit(process_file, path): path for path in json_files}
-        for future in as_completed(futures):
+    with ThreadPoolExecutor(max_workers=cpu_count() * 2) as executor:
+        tasks = {
+            executor.submit(process_file, path): path for path in json_files
+            }
+        
+        for task in as_completed(tasks):
             try:
-                datalist.append(future.result())
+                datalist.append(task.result())
             except Exception as exc:
-                print(f"Error processing file {futures[future]}: {exc}")
+                print(f"Error processing file {tasks[task]}: {exc}")
     
     return datalist
