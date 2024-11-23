@@ -20,7 +20,7 @@ def format_polygon(polygon, img_w, img_h, label, s_type):
         tl, br = polygon[0], polygon[1]
         polygon = [tl, [tl[0], br[1]], br, [br[0], tl[1]]]
     
-    poly_data = [LABELS.index(label) + 1]
+    poly_data = [min(LABELS.index(label), 4) + 1]
     for p in polygon:
         poly_data.append(round(p[0] / img_w, 5))
         poly_data.append(round(p[1] / img_h, 5))

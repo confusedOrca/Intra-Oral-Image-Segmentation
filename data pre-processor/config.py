@@ -6,6 +6,7 @@ LOWER_JAW_DIR = "Labels_Lower jaw"
 MAX_DIM = 512
 LABELS = [
     "tooth",
+    "non-carious lesion",
     "staining or visible changes without cavitation",
     "calculus",
     "visible changes with microcavitation", 
