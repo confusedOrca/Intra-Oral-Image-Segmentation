@@ -1,3 +1,4 @@
 dataset/*
+model/*
 !dataset/readme.txt
 **/__pycache__/
